@@ -1,0 +1,56 @@
+name: Production Deployment Pipeline
+
+on:
+
+  workflow_dispatch:
+
+  push:
+
+    branches:
+      - main
+
+jobs:
+
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Repository
+
+        uses: actions/checkout@v4
+
+      - name: Setup Docker Buildx
+
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Backend Docker Image
+
+        run: |
+
+          docker build -t edtech-backend ./backend
+
+      - name: Build Frontend Docker Image
+
+        run: |
+
+          docker build -t edtech-frontend ./frontend
+
+      - name: Docker Compose Validation
+
+        run: |
+
+          docker compose config
+
+      - name: Simulated Deployment
+
+        run: |
+
+          echo "Deploying Microsoft-Level EdTech Platform"
+
+      - name: Deployment Success
+
+        run: |
+
+          echo "Deployment completed successfully"

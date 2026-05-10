@@ -1,28 +1,30 @@
 from django.urls import path
 
 from .views import (
-    RecommendationView,
-    PredictionView,
-    AIHistoryView
+    AIRecommendationView,
+    AIChatbotView,
+    LearningPathView,
 )
+
+app_name = "ai_engine"
 
 urlpatterns = [
 
     path(
-        'recommendations/',
-        RecommendationView.as_view(),
-        name='ai-recommendations'
+        "recommendations/",
+        AIRecommendationView.as_view(),
+        name="recommendations",
     ),
 
     path(
-        'predictions/',
-        PredictionView.as_view(),
-        name='ai-predictions'
+        "chatbot/",
+        AIChatbotView.as_view(),
+        name="chatbot",
     ),
 
     path(
-        'history/',
-        AIHistoryView.as_view(),
-        name='ai-history'
+        "learning-path/",
+        LearningPathView.as_view(),
+        name="learning-path",
     ),
 ]

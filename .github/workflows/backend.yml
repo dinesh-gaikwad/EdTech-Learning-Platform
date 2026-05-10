@@ -1,0 +1,102 @@
+name: Backend CI Pipeline
+
+on:
+
+  push:
+
+    branches:
+      - main
+
+    paths:
+      - 'backend/**'
+
+  pull_request:
+
+    branches:
+      - main
+
+jobs:
+
+  backend-build:
+
+    runs-on: ubuntu-latest
+
+    defaults:
+
+      run:
+
+        working-directory: backend
+
+    services:
+
+      mysql:
+
+        image: mysql:8.0
+
+        env:
+
+          MYSQL_ROOT_PASSWORD: root
+
+          MYSQL_DATABASE: edtech
+
+        ports:
+
+          - 3306:3306
+
+        options: >-
+
+          --health-cmd="mysqladmin ping"
+
+          --health-interval=10s
+
+          --health-timeout=5s
+
+          --health-retries=3
+
+      redis:
+
+        image: redis:7
+
+        ports:
+
+          - 6379:6379
+
+    steps:
+
+      - name: Checkout Repository
+
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+
+        uses: actions/setup-python@v5
+
+        with:
+
+          python-version: '3.11'
+
+      - name: Install Dependencies
+
+        run: |
+
+          pip install --upgrade pip
+
+          pip install -r requirements.txt
+
+      - name: Run Migrations
+
+        run: |
+
+          python manage.py makemigrations
+
+          python manage.py migrate
+
+      - name: Run Tests
+
+        run: |
+
+          python manage.py test
+
+      - name: Backend Build Success
+
+        run: echo "Backend pipeline completed successfully"

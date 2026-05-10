@@ -1,0 +1,24 @@
+from django.apps import AppConfig
+
+
+class AnalyticsConfig(AppConfig):
+
+    default_auto_field = (
+        "django.db.models.BigAutoField"
+    )
+
+    name = "apps.analytics"
+
+    verbose_name = (
+        "EdTech Analytics Engine"
+    )
+
+    def ready(self):
+
+        try:
+
+            import apps.analytics.signals
+
+        except ImportError:
+
+            pass
