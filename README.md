@@ -1,6 +1,3 @@
-
-
-cat > README.md << 'EOF'
 # EdTech Learning Platform
 
 ## Tech Stack
@@ -15,17 +12,7 @@ cat > README.md << 'EOF'
 - AI Recommendation Engine
 
 ## Features
-- OAuth2 Authenticcat > README.md << 'EOF'
-# EdTech Learning Platform
-
-## Tech Stack
-- Django
-- React.js
-- MySQL
-- Docker
-- Three.js
-- OAuth2
-- ReportLabation
+- OAuth2 Authentication
 - Step Locked Learning Pipeline
 - Real Time Chat
 - AI Recommendation System
@@ -36,3 +23,8 @@ cat > README.md << 'EOF'
 - Docker Deployment
 - CI/CD Pipelines
 
+## Run Backend
+
+```bash
+cd backend
+python manage.py runserver
